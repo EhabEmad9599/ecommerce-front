@@ -1,0 +1,16 @@
+.login {
+  border: 1px solid #FFF;
+  padding:8px 12px !important;
+  margin: auto !important;
+  border-radius: 8px;
+}
+.register {
+  border: 1px solid #0B5ED7;
+  color: #FFF;
+  background-color: #0B5ED7;
+  padding:8px 12px !important;
+  margin: auto !important;
+  border-radius: 8px;
+  margin: 0px 8px !important;
+
+}
