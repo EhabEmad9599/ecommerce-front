@@ -10,7 +10,6 @@ const thunkGetCategories = createAsyncThunk('categories/thunkGetCategories', asy
 
   try {
     const response = await axios.get<TResponse>('http://localhost:5005/categories');
-    console.log(response);
     return response.data;
     
     
