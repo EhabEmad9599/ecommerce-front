@@ -21,7 +21,11 @@ const initialState: ICategoriesState = {
 const productsSlice = createSlice({
   name:'products',
   initialState,
-  reducers: {},
+  reducers: {
+    ProductsCleanUp: (state) => {
+      state.records = [];
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(thunkGetProductsByCatPrefix.pending, (state) => {
       state.loading = 'pending';
@@ -42,4 +46,5 @@ const productsSlice = createSlice({
 })
 
 
+export const {ProductsCleanUp} = productsSlice.actions;
 export default productsSlice.reducer

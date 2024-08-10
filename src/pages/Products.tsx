@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { useParams } from "react-router-dom";
 import thunkGetProductsByCatPrefix from "../store/products/thunk/thunkGetProductsByCatPrefix";
-
+import { ProductsCleanUp } from "../store/products/productsSlice";
 
 
 
@@ -20,6 +20,9 @@ export const Products = () => {
 
   useEffect(() =>{
     dispatch(thunkGetProductsByCatPrefix(params.prefix as string));
+    return () => {
+      dispatch(ProductsCleanUp());
+    }
 }, [dispatch, params])
 
 const productsList =
