@@ -1,10 +1,11 @@
+import { TCategory } from '../../types/category';
+import { TLoading } from '../../types/shared';
 import { createSlice } from "@reduxjs/toolkit";
 import thunkGetCategories from "./thunk/thunkGetCategories";
 
-
 export interface ICategoriesState {
-  records: {id:number, title:string, prefix:string, img:string}[];
-  loading: 'idle' | 'pending' | 'succeeded' | 'failed';
+  records: TCategory[];
+  loading: TLoading;
   error: string | null;
 }
 
