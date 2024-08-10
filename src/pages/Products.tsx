@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { useParams } from "react-router-dom";
 import thunkGetProductsByCatPrefix from "../store/products/thunk/thunkGetProductsByCatPrefix";
 import { ProductsCleanUp } from "../store/products/productsSlice";
-
+import Loading from "../components/feedback";
 
 
 
@@ -41,9 +41,9 @@ records.length > 0
 
 return (
 <Container>
-  <Row>
-    {productsList}
-  </Row>
+  <Loading status={loading} error={error}>
+    <Row>{productsList}</Row>
+  </Loading>
 </Container>
 );
 };

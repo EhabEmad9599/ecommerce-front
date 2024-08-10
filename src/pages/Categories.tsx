@@ -4,6 +4,7 @@ import { thunkGetCategories } from "../store/categories/categoriesSlice";
 import { Container, Row, Col } from "react-bootstrap";
 import { Category } from "../components/eCommerce/index";
 import { useEffect } from "react";
+import Loading from "../components/feedback";
 
 
 
@@ -34,9 +35,11 @@ export const Categories = () => {
 
   return (
     <Container>
+      <Loading status={loading} error={error}>
       <Row>
         {categoriesList}
       </Row>
+      </Loading>
     </Container>
   );
 };

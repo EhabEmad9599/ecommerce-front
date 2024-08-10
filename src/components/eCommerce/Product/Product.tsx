@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import styles from "./styles.module.css";
 const { product, productImg } = styles;
 
+
 const Product = ({ title, price, img }: TProduct) => {
   return (
     <div className={product}>

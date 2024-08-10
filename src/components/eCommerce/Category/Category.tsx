@@ -3,14 +3,12 @@ import styles from "./styles.module.css";
 import { TCategory } from "../../../types/category";
 const { category, categoryImg, categoryTitle } = styles;
 
-
-
 const Category = ({title, img, prefix}: TCategory) => {
   return (
     <div className={category}>
       <Link to={`/categories/products/${prefix}`}>
         <div className={categoryImg}>
-          <img
+          <img 
             src={img}
             alt={title}
           />

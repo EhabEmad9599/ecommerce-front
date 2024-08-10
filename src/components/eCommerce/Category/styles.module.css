@@ -1,11 +1,13 @@
-.category {
-  height: 180px;
-}
-
 .categoryImg {
+  max-height: 300px;
   overflow: hidden;
   border-radius: 4%;
   background-color: #f2f2f2;
+}
+
+.categoryImg img {
+  height: 100%;
+  object-fit: cover;
 }
 
 .category a {
