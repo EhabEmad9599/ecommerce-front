@@ -13,7 +13,9 @@ export const Categories = () => {
   const {loading, error, records} = useAppSelector((state) => state.categories);
 
   useEffect(() => {
-    dispatch(thunkGetCategories())
+    if(!records.length) {
+      dispatch(thunkGetCategories())
+    }
   }, [dispatch]);
 
   const categoriesList =
