@@ -14,8 +14,8 @@ export const MainLayout = () => {
           <div className={wrapper}>
         <Outlet/>
           </div>
+          <Footer/> 
         </Container>
-      <Footer/> 
     </>
   )
 }
