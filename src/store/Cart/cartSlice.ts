@@ -1,16 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { TProduct } from "../../types/product";
 import { getCarTotalQuantitySelector } from "./selectors";
+import thunkGetProductsByItems from "./thunkGetProductsByItems";
+import { TProduct } from "../../types/product";
+import { TLoading } from '../../types/shared';
 
 export interface ICartState {
-  items:{[key: number]: number};
-  productFullInfo: TProduct[]
+  items:{[key: string]: number};
+  productsFullInfo: TProduct[];
+  loading: TLoading;
+  error: null | string;
 }
 
 
 const initialState: ICartState = {
   items:{},
-  productFullInfo:[]
+  productsFullInfo:[],
+  loading:'idle',
+  error: null
 };
 
 const cartSlice = createSlice({
@@ -26,11 +32,27 @@ const cartSlice = createSlice({
       }
       
     }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(thunkGetProductsByItems.pending, (state) => {
+      state.loading = 'pending';
+      state.error = null;
+    });
+    builder.addCase(thunkGetProductsByItems.fulfilled, (state, action) => {
+      state.loading = 'succeeded';
+      state.productsFullInfo = action.payload;
+    });
+    builder.addCase(thunkGetProductsByItems.rejected, (state, action) => {
+      state.loading = 'failed';
+      if (action.payload && typeof action.payload === 'string') {
+        state.error = action.payload;
+      }
+    });
   }
 })
 
 
 
-export {getCarTotalQuantitySelector};
+export {getCarTotalQuantitySelector, thunkGetProductsByItems};
 export const {addToCart} = cartSlice.actions;
 export default cartSlice.reducer
