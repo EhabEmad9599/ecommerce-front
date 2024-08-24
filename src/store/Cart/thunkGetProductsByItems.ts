@@ -23,7 +23,6 @@ const thunkGetProductsByItems = createAsyncThunk(
       const response = await axios.get<TResponse>(
         `http://localhost:5005/products?${concatenatedItemsId}`
       );
-      // console.log(response);
       
       return response.data;
     } catch (error) {

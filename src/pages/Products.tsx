@@ -9,10 +9,6 @@ import Loading from "../components/feedback";
 import { GridList } from "../components/common";
 
 
-
-
-
-
 export const Products = () => {
 
   const dispatch = useAppDispatch();
