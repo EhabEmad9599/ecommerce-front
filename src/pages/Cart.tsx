@@ -1,8 +1,8 @@
 import { useCallback, useEffect } from "react"
-import { CartItem, CartItemList, CartSubtotalPrice } from "../components/eCommerce"
+import { CartItemList, CartSubtotalPrice } from "../components/eCommerce"
 import { useAppDispatch, useAppSelector } from "../store/hooks"
 import thunkGetProductsByItems from "../store/Cart/thunkGetProductsByItems"
-import { cartItemChangeQuantity } from "../store/Cart/cartSlice";
+import { cartItemChangeQuantity, cartItemRemove } from "../store/Cart/cartSlice";
 import Loading from "../components/feedback"
 
 
@@ -19,16 +19,34 @@ export const Cart = () => {
     quantity: items[el.id],
   }));
 
+  // changeQuantityHandler
   const changeQuantityHandler = useCallback((id: number, quantity: number) => {
       dispatch(cartItemChangeQuantity(({id, quantity})));
-  }, [dispatch])
+  }, [dispatch]);
+
+  // Remove Item
+
+  const removeItemHandler = useCallback(
+    (id: number) => {
+      dispatch(cartItemRemove(id));
+    },
+    [dispatch]
+  );
 
   return (
     <>
-      <h2>Cart</h2>
+      <h2>Your Cart</h2>
       <Loading status={loading} error={error}>
-        <CartItemList products={products} changeQuantityHandler={changeQuantityHandler}/>
-        <CartSubtotalPrice/>
+        {products.length ? (
+        <>
+          <CartItemList products={products} changeQuantityHandler={changeQuantityHandler} 
+          removeItemHandler={removeItemHandler}/>
+          <CartSubtotalPrice products={products}/>
+
+        </>
+        ): 'Your Cart is empty'}
+
+        
       </Loading>
 
   </>

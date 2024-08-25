@@ -7,9 +7,12 @@ import { memo } from "react";
 const { cartItem, product, productImg, productInfo, cartItemSelection } =
   styles;
 
-  type CartItemProps = TProduct & {changeQuantityHandler: (id:number, quantity: number) => void};
+  type CartItemProps = TProduct & {
+    changeQuantityHandler: (id:number, quantity: number) => void;
+    removeItemHandler: (id: number) => void;
+  };
 
-const CartItem = memo(({id, title, img, price, max, quantity, changeQuantityHandler}: CartItemProps) => {
+const CartItem = memo(({id, title, img, price, max, quantity, changeQuantityHandler, removeItemHandler}: CartItemProps) => {
 
       // render option list
       const renderOptions = Array(max)
@@ -28,6 +31,7 @@ const CartItem = memo(({id, title, img, price, max, quantity, changeQuantityHand
         changeQuantityHandler(id, quantity);
       };
 
+      
 
 
   return (
@@ -55,6 +59,7 @@ const CartItem = memo(({id, title, img, price, max, quantity, changeQuantityHand
             variant="secondary"
             style={{ color: "white", width:'100px' }}
             className="mt-4"
+            onClick={() => removeItemHandler(id)}
           >
             Remove
           </Button>
