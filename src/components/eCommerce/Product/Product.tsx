@@ -4,9 +4,10 @@ import styles from "./styles.module.css";
 import { useAppDispatch } from "../../../store/hooks";
 import { addToCart } from "../../../store/Cart/cartSlice";
 import { useEffect, useState } from "react";
-const { product, productImg } = styles;
+const { product, productImg, wishlistBtn } = styles;
 
-
+import Like from "../../../assets/like.svg?react";
+import LikeFull from "../../../assets/like-fill.svg?react";
 
 
 const Product = ({id, title, price, img }: TProduct) => {
@@ -35,6 +36,9 @@ const Product = ({id, title, price, img }: TProduct) => {
 
   return (
     <div className={product}>
+      <div className={wishlistBtn}>
+        <Like/>
+      </div>
       <div className={productImg}>
         <img src={img} alt={title} />
       </div>
@@ -42,8 +46,8 @@ const Product = ({id, title, price, img }: TProduct) => {
       <h3>{price} EGP</h3>
       <Button variant='info' style={{color:'white'}} onClick={addToCartHandler} disabled={isBtnDisabled} >
         {isBtnDisabled ? <> <Spinner animation="border" size="sm"/>Loading...</> : 'Add to cart' }
-          
       </Button>
+
     </div>
   );
 };
