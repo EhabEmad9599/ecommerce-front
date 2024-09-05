@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { HeaderBasket } from '../../eCommerce/HeaderBasket/HeaderBasket';
 import { NavLink } from 'react-router-dom';
+import { HeaderWishlist } from '../../eCommerce';
 
 
 const {login, register} = styles;
@@ -23,6 +24,7 @@ export const Header = () => {
             <Nav.Link as={NavLink} to="/Login" className={login}>Login</Nav.Link>
             <Nav.Link as={NavLink} to="/Register" className={register}>Register</Nav.Link>
           </Nav>
+          <HeaderWishlist/>
           <HeaderBasket/>
         </Navbar.Collapse>
       </Container>

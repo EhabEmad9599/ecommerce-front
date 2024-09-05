@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import Logo from "../../../assets/svg/cart.svg?react";
-
+import Wishlist from "../../../assets/wishlist.svg?react";
 import { getCarTotalQuantitySelector } from "../../../store/Cart/cartSlice";
 import { useAppSelector } from "../../../store/hooks";
 import styles from './styles.module.css';
 import { useNavigate } from "react-router-dom";
 const {container, totalNum, pumpAnimate, iconWrapper} = styles;
 
-export const HeaderBasket = () => {
+export const HeaderWishlist = () => {
 
   const navigate = useNavigate();
 
@@ -33,8 +32,8 @@ export const HeaderBasket = () => {
   return (
     <div className={container} onClick={() => navigate('/cart')}>
       <div className={iconWrapper}>
-        <span> | Cart</span>
-        <Logo title="basket icon" />
+        <span> | Wishlist</span>
+        <Wishlist title="Wishlist icon" />
         {totalQuantity > 0 && (
           <div className={quantityStyle}>{totalQuantity}</div>
         )}
