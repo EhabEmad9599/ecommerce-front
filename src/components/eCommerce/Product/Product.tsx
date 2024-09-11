@@ -1,13 +1,14 @@
 import { TProduct } from "../../../types/product";
+import { useAppDispatch } from "../../../store/hooks";
+import { useEffect, useState } from "react";
 import { Button, Spinner } from "react-bootstrap";
 import styles from "./styles.module.css";
-import { useAppDispatch } from "../../../store/hooks";
 import { addToCart } from "../../../store/Cart/cartSlice";
-import { useEffect, useState } from "react";
 const { product, productImg, wishlistBtn } = styles;
 
 import Like from "../../../assets/like.svg?react";
 import LikeFull from "../../../assets/like-fill.svg?react";
+import thunkLikeToggle from "../../../store/wishlist/thunk/thunkLikeToggle";
 
 
 const Product = ({id, title, price, img }: TProduct) => {
@@ -33,10 +34,14 @@ const Product = ({id, title, price, img }: TProduct) => {
     setIsBtnClicked((prev) => prev + 1)
   }
 
+  const likeToggleHandler = () => {
+    dispatch(thunkLikeToggle(id));
+  }
+
 
   return (
     <div className={product}>
-      <div className={wishlistBtn}>
+      <div className={wishlistBtn} onClick={likeToggleHandler}>
         <Like/>
       </div>
       <div className={productImg}>
