@@ -11,12 +11,13 @@ import LikeFull from "../../../assets/like-fill.svg?react";
 import thunkLikeToggle from "../../../store/wishlist/thunk/thunkLikeToggle";
 
 
-const Product = ({id, title, price, img }: TProduct) => {
+const Product = ({id, title, price, img, isLiked }: TProduct) => {
 
   const dispatch = useAppDispatch();
 
   const [isBtnClicked, setIsBtnClicked] = useState(0);
   const [isBtnDisabled, setIsBtnDisabled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if(!isBtnClicked) {
@@ -35,14 +36,17 @@ const Product = ({id, title, price, img }: TProduct) => {
   }
 
   const likeToggleHandler = () => {
-    dispatch(thunkLikeToggle(id));
+    setIsLoading(true);
+    dispatch(thunkLikeToggle(id)).unwrap()
+    .then(() => setIsLoading(false))
+    .catch(() => setIsLoading(false));
   }
 
 
   return (
     <div className={product}>
       <div className={wishlistBtn} onClick={likeToggleHandler}>
-        <Like/>
+        {isLoading ? (<Spinner animation="border" size="sm" variant="primary"/>) : isLiked ? <LikeFull/> : <Like/> }
       </div>
       <div className={productImg}>
         <img src={img} alt={title} />

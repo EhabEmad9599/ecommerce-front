@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import Wishlist from "../../../assets/wishlist.svg?react";
-import { getCarTotalQuantitySelector } from "../../../store/Cart/cartSlice";
 import { useAppSelector } from "../../../store/hooks";
-import styles from './styles.module.css';
 import { useNavigate } from "react-router-dom";
+import Wishlist from "../../../assets/wishlist.svg?react";
+import styles from './styles.module.css';
+
 const {container, totalNum, pumpAnimate, iconWrapper} = styles;
 
 export const HeaderWishlist = () => {
@@ -11,7 +11,7 @@ export const HeaderWishlist = () => {
   const navigate = useNavigate();
 
   const [isAnimate, setIsAnimate] = useState(false);
-  const totalQuantity = useAppSelector(getCarTotalQuantitySelector);
+  const totalQuantity = useAppSelector((state) => state.wishlist.itemsId);
   const quantityStyle = `${totalNum} ${
     isAnimate ? pumpAnimate : ""
   }`;
@@ -34,8 +34,8 @@ export const HeaderWishlist = () => {
       <div className={iconWrapper}>
         <span> | Wishlist</span>
         <Wishlist title="Wishlist icon" />
-        {totalQuantity > 0 && (
-          <div className={quantityStyle}>{totalQuantity}</div>
+        {totalQuantity.length > 0 && (
+          <div className={quantityStyle}>{totalQuantity.length}</div>
         )}
       </div>
     </div>

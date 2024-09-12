@@ -1,5 +1,4 @@
 import { Container } from "react-bootstrap";
-import { Product } from "../components/eCommerce/index";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { useParams } from "react-router-dom";
@@ -7,6 +6,7 @@ import thunkGetProductsByCatPrefix from "../store/products/thunk/thunkGetProduct
 import { ProductsCleanUp } from "../store/products/productsSlice";
 import Loading from "../components/feedback";
 import { GridList } from "../components/common";
+import { Product } from "../components/eCommerce";
 
 
 export const Products = () => {
@@ -14,6 +14,8 @@ export const Products = () => {
   const dispatch = useAppDispatch();
   const {loading, error, records} = useAppSelector(state => state.products);
   const params = useParams();
+  const cartItems = useAppSelector((state) => state.cart.items);
+  const wishListItemsIds = useAppSelector((state) => state.wishlist.itemsId);
 
   useEffect(() =>{
     dispatch(thunkGetProductsByCatPrefix(params.prefix as string));
@@ -22,11 +24,17 @@ export const Products = () => {
     }
 }, [dispatch, params])
 
+const productsFullInfo = records.map((el) => ({
+  ...el,
+  quantity: cartItems[el.id],
+  isLiked : wishListItemsIds.includes(el.id)
+}))
+
 
 return (
 <Container>
   <Loading status={loading} error={error}>
-  <GridList records={records} renderItem={(record) => <Product {...record}/> }/>
+  <GridList records={productsFullInfo} renderItem={(record) => <Product {...record}/> }/>
   </Loading>
 </Container>
 );

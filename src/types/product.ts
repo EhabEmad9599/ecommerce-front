@@ -6,5 +6,6 @@ export type TProduct = {
   img: string;
   max:0;
   quantity?:number;
+  isLiked?: boolean;
 
 };
