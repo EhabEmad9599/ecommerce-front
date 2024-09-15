@@ -13,8 +13,8 @@ export const Products = () => {
 
   const dispatch = useAppDispatch();
   const {loading, error, records} = useAppSelector(state => state.products);
-  const params = useParams();
   const cartItems = useAppSelector((state) => state.cart.items);
+  const params = useParams();
   const wishListItemsIds = useAppSelector((state) => state.wishlist.itemsId);
 
   useEffect(() =>{

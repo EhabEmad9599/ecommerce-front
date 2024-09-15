@@ -36,10 +36,13 @@ const Product = ({id, title, price, img, isLiked }: TProduct) => {
   }
 
   const likeToggleHandler = () => {
-    setIsLoading(true);
-    dispatch(thunkLikeToggle(id)).unwrap()
-    .then(() => setIsLoading(false))
-    .catch(() => setIsLoading(false));
+    if(!isLoading) {
+      setIsLoading(true);
+      dispatch(thunkLikeToggle(id)).unwrap()
+      .then(() => setIsLoading(false))
+      .catch(() => setIsLoading(false));
+
+    }
   }
 
 

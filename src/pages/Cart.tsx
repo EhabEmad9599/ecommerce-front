@@ -35,7 +35,7 @@ export const Cart = () => {
 
   return (
     <>
-      <h2>Your Cart</h2>
+      <h3>Your Cart</h3>
       <Loading status={loading} error={error}>
         {products.length ? (
         <>

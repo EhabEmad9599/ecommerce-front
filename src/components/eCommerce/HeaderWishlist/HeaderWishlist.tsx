@@ -30,7 +30,7 @@ export const HeaderWishlist = () => {
   }, [totalQuantity]);
 
   return (
-    <div className={container} onClick={() => navigate('/cart')}>
+    <div className={container} onClick={() => navigate('/wishlist')}>
       <div className={iconWrapper}>
         <span> | Wishlist</span>
         <Wishlist title="Wishlist icon" />

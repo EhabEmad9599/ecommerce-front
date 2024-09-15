@@ -1,25 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit";
-import thunkLikeToggle from "./thunkLikeToggle";
-import { TProduct } from "../../../types/product";
-
+import thunkLikeToggle from "./thunk/thunkLikeToggle";
+import { TProduct } from "../../types/product";
+import thunkGetWishlist from "./thunk/thunkGetWishlist";
+import { TLoading } from '../../types/shared';
 
 export interface IWishlistState {
   itemsId: number[];
   productsFullInfo: TProduct[];
   error: null | string;
+  loading: TLoading;
 }
 
 const initialState: IWishlistState = {
   itemsId: [],
   productsFullInfo: [],
   error: null,
+  loading: "idle",
 }
 
 
 const wishlistSlice = createSlice({
   name: 'wishlist',
   initialState,
-  reducers: {},
+  reducers: {
+    productsFullInfoCleanUp: (state) => {
+      state.productsFullInfo = [];
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(thunkLikeToggle.pending, (state) => {
       state.error = null
@@ -41,9 +48,27 @@ const wishlistSlice = createSlice({
         state.error = action.payload;
       }
     });
+    // get wishlist items
+    builder.addCase(thunkGetWishlist.pending, (state) => {
+      state.loading = 'pending';
+      state.error = null
+    });
+
+    builder.addCase(thunkGetWishlist.fulfilled, (state, action) => {
+      state.loading = 'succeeded';
+      state.productsFullInfo = action.payload;
+    });
+
+    builder.addCase(thunkGetWishlist.rejected, (state, action) => {
+      state.loading = 'failed';
+      if (action.payload && typeof action.payload === "string") {
+        state.error = action.payload;
+      }
+    });
   }
 });
 
 
-export {thunkLikeToggle};
+export {thunkLikeToggle, thunkGetWishlist};
+export const {productsFullInfoCleanUp} = wishlistSlice.actions;
 export default wishlistSlice.reducer;
