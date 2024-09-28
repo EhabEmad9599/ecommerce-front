@@ -1,38 +1,12 @@
-import { useCallback, useEffect } from "react"
+
 import { CartItemList, CartSubtotalPrice } from "../components/eCommerce"
-import { useAppDispatch, useAppSelector } from "../store/hooks"
-import thunkGetProductsByItems from "../store/Cart/thunkGetProductsByItems"
-import { cartItemChangeQuantity, cartItemRemove } from "../store/Cart/cartSlice";
-import Loading from "../components/feedback"
+import Loading from "../components/feedback";
+import { useCart } from "../hooks/useCart";
 
 
-export const Cart = () => {
-  const dispatch = useAppDispatch();
-  const {items, productsFullInfo ,loading, error} = useAppSelector((state) => state.cart);
+const Cart = () => {
 
-  useEffect(() => {
-    dispatch(thunkGetProductsByItems());
-  }, [dispatch]);
-
-  const products = productsFullInfo.map((el) => ({
-    ...el,
-    quantity: items[el.id],
-  }));
-
-  // changeQuantityHandler
-  const changeQuantityHandler = useCallback((id: number, quantity: number) => {
-      dispatch(cartItemChangeQuantity(({id, quantity})));
-  }, [dispatch]);
-
-  // Remove Item
-
-  const removeItemHandler = useCallback(
-    (id: number) => {
-      dispatch(cartItemRemove(id));
-    },
-    [dispatch]
-  );
-
+const {loading, error, products, changeQuantityHandler ,removeItemHandler } = useCart();
   return (
     <>
       <h3>Your Cart</h3>
@@ -52,3 +26,5 @@ export const Cart = () => {
   </>
   )
 }
+
+export default Cart;

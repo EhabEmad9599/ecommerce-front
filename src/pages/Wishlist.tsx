@@ -1,32 +1,15 @@
-import { useAppDispatch, useAppSelector } from "../store/hooks"
-import { thunkGetWishlist, productsFullInfoCleanUp } from "../store/wishlist/wishlistSlice"
-import { useEffect } from "react";
+
 import { GridList } from "../components/common";
 import Loading from "../components/feedback";
 import { TProduct } from "../types/product";
 import { Product } from "../components/eCommerce";
+import { useWishlist } from "../hooks/useWishlist";
 
 
 
-export const Wishlist = () => {
-  const dispatch = useAppDispatch();
-  const {loading, error, productsFullInfo} = useAppSelector(state => state.wishlist);
-  const cartItems = useAppSelector((state) => state.cart.items);
+const Wishlist = () => {
 
-  useEffect(()=> {
-    dispatch(thunkGetWishlist());
-    return () => {
-      dispatch(productsFullInfoCleanUp());
-    }
-  }, [dispatch]);
-
-
-  const records = productsFullInfo.map((el) => ({
-    ...el,
-    quantity: cartItems[el.id],
-    isLiked : true
-  }))
-
+const {loading, error, records} = useWishlist();
 
 
   return (
@@ -41,3 +24,6 @@ export const Wishlist = () => {
     </>
   )
 }
+
+
+export default Wishlist;

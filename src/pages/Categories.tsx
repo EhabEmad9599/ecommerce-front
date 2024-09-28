@@ -1,23 +1,15 @@
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { thunkGetCategories } from "../store/categories/categoriesSlice";
+
 
 import { Container} from "react-bootstrap";
 import { Category } from "../components/eCommerce/index";
-import { useEffect } from "react";
 import Loading from "../components/feedback";
 import { GridList } from "../components/common";
+import { useCategories } from "../hooks/useCategories";
 
 
 
-export const Categories = () => {
-  const dispatch = useAppDispatch();
-  const {loading, error, records} = useAppSelector((state) => state.categories);
-
-  useEffect(() => {
-    if(!records.length) {
-      dispatch(thunkGetCategories())
-    }
-  }, [dispatch]);
+const Categories = () => {
+  const {loading, error, records} = useCategories();
 
 
 
@@ -31,3 +23,5 @@ export const Categories = () => {
     </Container>
   );
 };
+
+export default Categories;

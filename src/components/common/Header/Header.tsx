@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { HeaderBasket } from '../../eCommerce/HeaderBasket/HeaderBasket';
 import { NavLink } from 'react-router-dom';
 import { HeaderWishlist } from '../../eCommerce';
-
+// import { HeaderCounter } from './HeaderCounter/HeaderCounter';
 
 const {navbar} = styles;
 
@@ -27,6 +27,8 @@ export const Header = () => {
           </Nav>
           <HeaderWishlist/>
           <HeaderBasket/>
+          {/* <HeaderCounter page='wishList'/>
+          <HeaderCounter/> */}
         </Navbar.Collapse>
       </Container>
     </Navbar>

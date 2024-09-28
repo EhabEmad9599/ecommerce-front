@@ -41,6 +41,9 @@ const cartSlice = createSlice({
       state.productsFullInfo = state.productsFullInfo.filter((el) => el.id !== action.payload
     );
 },
+cleanCartProductsFullInfo: (state) => {
+  state.productsFullInfo = [];
+}
 
   },
   extraReducers: (builder) => {
@@ -64,5 +67,5 @@ const cartSlice = createSlice({
 
 
 export {getCarTotalQuantitySelector, thunkGetProductsByItems};
-export const {addToCart, cartItemChangeQuantity, cartItemRemove} = cartSlice.actions;
+export const {addToCart, cartItemChangeQuantity, cartItemRemove, cleanCartProductsFullInfo} = cartSlice.actions;
 export default cartSlice.reducer

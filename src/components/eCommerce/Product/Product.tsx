@@ -1,6 +1,6 @@
 import { TProduct } from "../../../types/product";
 import { useAppDispatch } from "../../../store/hooks";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Button, Spinner } from "react-bootstrap";
 import styles from "./styles.module.css";
 import { addToCart } from "../../../store/Cart/cartSlice";
@@ -11,9 +11,11 @@ import LikeFull from "../../../assets/like-fill.svg?react";
 import thunkLikeToggle from "../../../store/wishlist/thunk/thunkLikeToggle";
 
 
-const Product = ({id, title, price, img, isLiked }: TProduct) => {
+const Product = memo(({id, title, price, img, isLiked }: TProduct) => {
 
   const dispatch = useAppDispatch();
+  console.log('test');
+  
 
   const [isBtnClicked, setIsBtnClicked] = useState(0);
   const [isBtnDisabled, setIsBtnDisabled] = useState(false);
@@ -62,6 +64,6 @@ const Product = ({id, title, price, img, isLiked }: TProduct) => {
 
     </div>
   );
-};
+});
 
 export default Product;
