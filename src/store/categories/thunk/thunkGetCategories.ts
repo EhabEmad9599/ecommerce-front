@@ -6,10 +6,10 @@ import { TCategory } from "../../../types/category";
 type TResponse = TCategory[];
 
 const thunkGetCategories = createAsyncThunk('categories/thunkGetCategories', async(_,thunkAPI) => {
-  const {rejectWithValue} = thunkAPI;
+  const {rejectWithValue, signal} = thunkAPI;
 
   try {
-    const response = await axios.get<TResponse>('http://localhost:5005/categories');
+    const response = await axios.get<TResponse>('http://localhost:5005/categories', {signal});
     return response.data;
     
     

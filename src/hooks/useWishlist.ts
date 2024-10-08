@@ -9,9 +9,10 @@ export const useWishlist = () => {
   const cartItems = useAppSelector((state) => state.cart.items);
 
   useEffect(()=> {
-    dispatch(thunkGetWishlist());
+    const promise = dispatch(thunkGetWishlist());
     return () => {
       dispatch(cleanWishListProductsFullInfo());
+      promise.abort();
     }
   }, [dispatch]);
 

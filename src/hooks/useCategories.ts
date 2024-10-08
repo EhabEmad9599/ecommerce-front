@@ -8,10 +8,11 @@ export const useCategories = () => {
 
   useEffect(() => {
     if(!records.length) {
-      dispatch(thunkGetCategories());
+      const promise = dispatch(thunkGetCategories());
 
       return () => {
         dispatch(categoriesRecordsCleanUp());
+        promise.abort();
       }
     }
   }, [dispatch]);

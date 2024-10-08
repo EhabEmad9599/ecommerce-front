@@ -13,9 +13,10 @@ export const useProducts = () => {
   // const productPrefix = params.prefix;
 
   useEffect(() =>{
-    dispatch(thunkGetProductsByCatPrefix(params.prefix as string));
+    const promise = dispatch(thunkGetProductsByCatPrefix(params.prefix as string));
     return () => {
       dispatch(cleanUpProductsRecords());
+      promise.abort();
     }
 }, [dispatch, params])
 
