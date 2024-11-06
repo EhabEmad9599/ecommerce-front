@@ -1,4 +1,4 @@
-import { Loading } from "./Loading/Loading";
+import  Loading  from "./Loading/Loading";
 
 
 
